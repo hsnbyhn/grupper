@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grupper - Create Post</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation between mockups -->
+  <nav class="mockup-nav">
+    <a href="groups-list.html">Groups List</a>
+    <a href="group-detail.html">Group Detail</a>
+    <a href="post-detail.html">Post Detail</a>
+    <a href="create-group.html">Create Group</a>
+    <a href="create-post.html" class="active">Create Post</a>
+    <a href="manage-tags.html">Manage Tags</a>
+  </nav>
+
+  <p class="page-title">Create Post Screen</p>
+
+  <!-- Phone Frame -->
+  <div class="phone-frame">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="icons">
+        <span>signal</span>
+        <span>wifi</span>
+        <span>battery</span>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <a href="group-detail.html" class="nav-link">
+        <button class="icon-btn" title="Close">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </a>
+      <span class="app-bar-title center">New Post</span>
+      <button class="btn-text" style="font-size: 14px; padding: 0 8px; color: var(--primary); font-weight: 600;">Post</button>
+    </div>
+
+    <!-- Content -->
+    <div class="content content-white" style="padding: 16px;">
+      <!-- Group Context -->
+      <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--surface); border-radius: 12px; margin-bottom: 20px;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #7C3AED, #A78BFA); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">K</div>
+        <div>
+          <div style="font-size: 14px; font-weight: 600;">Kotlin Developers</div>
+          <div style="font-size: 12px; color: var(--text-tertiary);">Posting to this group</div>
+        </div>
+      </div>
+
+      <!-- Title Field -->
+      <div class="text-field">
+        <label>Title *</label>
+        <input type="text" placeholder="What's your post about?" value="Best practices for error handling in Kotlin coroutines?" />
+        <span class="helper">52/100 characters</span>
+      </div>
+
+      <!-- Content Field -->
+      <div class="text-field">
+        <label>Content *</label>
+        <textarea placeholder="Share your thoughts, questions, or ideas..." style="height: 140px;">I'm building a network layer with Retrofit and coroutines. What's the recommended way to handle exceptions?
+
+Should I use try-catch blocks, Result wrapper class, or sealed classes for error states?
+
+Any advice from experienced devs would be appreciated!</textarea>
+        <span class="helper">234/5000 characters</span>
+      </div>
+
+      <!-- Tag Selector -->
+      <div class="text-field">
+        <label>Tag *</label>
+        <div style="display: flex; align-items: center; justify-content: space-between; height: 48px; padding: 0 16px; border: 1px solid var(--outline); border-radius: 8px; cursor: pointer;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 12px; height: 12px; border-radius: 50%; background: #3B82F6;"></span>
+            <span>Questions</span>
+          </div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Image Picker (smaller) -->
+      <div class="text-field">
+        <label>Image (optional)</label>
+        <div class="image-picker" style="height: 100px;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <span style="font-size: 14px;">Add an image</span>
+        </div>
+      </div>
+
+      <!-- Author Name -->
+      <div class="text-field">
+        <label>Your Name *</label>
+        <input type="text" placeholder="How should we display your name?" value="Mike Johnson" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Second Phone: Tag Selection Bottom Sheet -->
+  <p class="page-title">Tag Selection (bottom sheet)</p>
+
+  <div class="phone-frame">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="icons">
+        <span>signal</span>
+        <span>wifi</span>
+        <span>battery</span>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <button class="icon-btn" title="Close">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <span class="app-bar-title center">New Post</span>
+      <button class="btn-text" style="font-size: 14px; padding: 0 8px; opacity: 0.5;">Post</button>
+    </div>
+
+    <!-- Content (dimmed) -->
+    <div class="content content-white" style="padding: 16px; opacity: 0.3;">
+      <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--surface); border-radius: 12px; margin-bottom: 20px;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #7C3AED, #A78BFA);"></div>
+        <div>
+          <div style="font-size: 14px; font-weight: 600;">Kotlin Developers</div>
+          <div style="font-size: 12px; color: var(--text-tertiary);">Posting to this group</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Sheet Overlay -->
+    <div class="bottom-sheet-overlay">
+      <div class="bottom-sheet">
+        <div class="bottom-sheet-handle"></div>
+        <h3>Select a Tag</h3>
+
+        <!-- Tag Options -->
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <div style="display: flex; align-items: center; gap: 12px; padding: 14px 8px; border-radius: 8px; cursor: pointer;">
+            <span style="width: 16px; height: 16px; border-radius: 50%; background: #8B5CF6;"></span>
+            <span style="flex: 1;">General</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; padding: 14px 8px; border-radius: 8px; cursor: pointer; background: rgba(59, 130, 246, 0.1);">
+            <span style="width: 16px; height: 16px; border-radius: 50%; background: #3B82F6;"></span>
+            <span style="flex: 1; font-weight: 600;">Questions</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; padding: 14px 8px; border-radius: 8px; cursor: pointer;">
+            <span style="width: 16px; height: 16px; border-radius: 50%; background: #22C55E;"></span>
+            <span style="flex: 1;">Tips</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; padding: 14px 8px; border-radius: 8px; cursor: pointer;">
+            <span style="width: 16px; height: 16px; border-radius: 50%; background: #F59E0B;"></span>
+            <span style="flex: 1;">News</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px; padding: 14px 8px; border-radius: 8px; cursor: pointer;">
+            <span style="width: 16px; height: 16px; border-radius: 50%; background: #EC4899;"></span>
+            <span style="flex: 1;">Jobs</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Third Phone: With Image Preview -->
+  <p class="page-title">Create Post (with image)</p>
+
+  <div class="phone-frame">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="icons">
+        <span>signal</span>
+        <span>wifi</span>
+        <span>battery</span>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <button class="icon-btn" title="Close">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <span class="app-bar-title center">New Post</span>
+      <button class="btn-text" style="font-size: 14px; padding: 0 8px; color: var(--primary); font-weight: 600;">Post</button>
+    </div>
+
+    <!-- Content -->
+    <div class="content content-white" style="padding: 16px;">
+      <!-- Group Context -->
+      <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--surface); border-radius: 12px; margin-bottom: 20px;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, #7C3AED, #A78BFA); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">K</div>
+        <div>
+          <div style="font-size: 14px; font-weight: 600;">Kotlin Developers</div>
+          <div style="font-size: 12px; color: var(--text-tertiary);">Posting to this group</div>
+        </div>
+      </div>
+
+      <!-- Title Field -->
+      <div class="text-field">
+        <label>Title *</label>
+        <input type="text" placeholder="What's your post about?" value="My Kotlin coroutines architecture diagram" />
+        <span class="helper">40/100 characters</span>
+      </div>
+
+      <!-- Content Field (shorter for image) -->
+      <div class="text-field">
+        <label>Content *</label>
+        <textarea placeholder="Share your thoughts, questions, or ideas..." style="height: 80px;">Here's how I structure my coroutine scopes in Android apps. Let me know what you think!</textarea>
+        <span class="helper">89/5000 characters</span>
+      </div>
+
+      <!-- Tag Selector -->
+      <div class="text-field">
+        <label>Tag *</label>
+        <div style="display: flex; align-items: center; justify-content: space-between; height: 48px; padding: 0 16px; border: 1px solid var(--outline); border-radius: 8px; cursor: pointer;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 12px; height: 12px; border-radius: 50%; background: #22C55E;"></span>
+            <span>Tips</span>
+          </div>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Image Preview -->
+      <div class="text-field">
+        <label>Image (optional)</label>
+        <div style="position: relative; border-radius: 12px; overflow: hidden;">
+          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600" style="width: 100%; height: 120px; object-fit: cover;" />
+          <button style="position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; border-radius: 50%; background: rgba(0,0,0,0.6); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Author Name -->
+      <div class="text-field">
+        <label>Your Name *</label>
+        <input type="text" placeholder="How should we display your name?" value="Sarah Chen" />
+      </div>
+    </div>
+  </div>
+</body>
+</html>

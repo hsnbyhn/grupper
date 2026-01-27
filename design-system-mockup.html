@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupper Design System - Component Mockup</title>
+    <style>
+        /* Design System - Color Palette */
+        :root {
+            /* Primary Colors */
+            --primary: #7C3AED;
+            --on-primary: #FFFFFF;
+            --primary-container: #EDE9FE;
+            --on-primary-container: #5B21B6;
+
+            /* Secondary Colors */
+            --secondary: #14B8A6;
+            --on-secondary: #FFFFFF;
+            --secondary-container: #CCFBF1;
+            --on-secondary-container: #0F766E;
+
+            /* Tertiary Colors */
+            --tertiary: #F59E0B;
+            --on-tertiary: #FFFFFF;
+            --tertiary-container: #FEF3C7;
+            --on-tertiary-container: #D97706;
+
+            /* Surface Colors */
+            --surface: #FFFFFF;
+            --on-surface: #1F2937;
+            --surface-variant: #F3F4F6;
+            --on-surface-variant: #6B7280;
+
+            /* Background */
+            --background: #F9FAFB;
+            --on-background: #1F2937;
+
+            /* Outline & Borders */
+            --outline: #D1D5DB;
+            --outline-variant: #E5E7EB;
+
+            /* Semantic Colors */
+            --error: #EF4444;
+            --on-error: #FFFFFF;
+            --error-container: #FEE2E2;
+            --on-error-container: #991B1B;
+
+            --success: #10B981;
+            --warning: #F59E0B;
+
+            /* Spacing Scale */
+            --spacing-xxs: 4px;
+            --spacing-xs: 8px;
+            --spacing-s: 12px;
+            --spacing-m: 16px;
+            --spacing-l: 24px;
+            --spacing-xl: 32px;
+            --spacing-xxl: 48px;
+
+            /* Border Radius */
+            --radius-xs: 4px;
+            --radius-s: 8px;
+            --radius-m: 12px;
+            --radius-l: 16px;
+            --radius-xl: 24px;
+            --radius-full: 9999px;
+
+            /* Elevation Shadows */
+            --elevation-0: none;
+            --elevation-1: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.08);
+            --elevation-2: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.06);
+            --elevation-3: 0px 10px 15px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background-color: var(--background);
+            color: var(--on-background);
+            line-height: 1.5;
+            padding: var(--spacing-l);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Typography Styles */
+        .display-large { font-size: 57px; font-weight: 400; line-height: 64px; letter-spacing: -0.25px; }
+        .display-medium { font-size: 45px; font-weight: 400; line-height: 52px; }
+        .display-small { font-size: 36px; font-weight: 400; line-height: 44px; }
+        .headline-large { font-size: 32px; font-weight: 600; line-height: 40px; }
+        .headline-medium { font-size: 28px; font-weight: 600; line-height: 36px; }
+        .headline-small { font-size: 24px; font-weight: 600; line-height: 32px; }
+        .title-large { font-size: 22px; font-weight: 500; line-height: 28px; }
+        .title-medium { font-size: 16px; font-weight: 600; line-height: 24px; letter-spacing: 0.15px; }
+        .title-small { font-size: 14px; font-weight: 600; line-height: 20px; letter-spacing: 0.1px; }
+        .body-large { font-size: 16px; font-weight: 400; line-height: 24px; letter-spacing: 0.5px; }
+        .body-medium { font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: 0.25px; }
+        .body-small { font-size: 12px; font-weight: 400; line-height: 16px; letter-spacing: 0.4px; }
+        .label-large { font-size: 14px; font-weight: 600; line-height: 20px; letter-spacing: 0.1px; }
+        .label-medium { font-size: 12px; font-weight: 600; line-height: 16px; letter-spacing: 0.5px; }
+        .label-small { font-size: 11px; font-weight: 600; line-height: 16px; letter-spacing: 0.5px; }
+
+        /* Section Styles */
+        .section {
+            background: var(--surface);
+            border-radius: var(--radius-m);
+            padding: var(--spacing-l);
+            margin-bottom: var(--spacing-l);
+            box-shadow: var(--elevation-1);
+        }
+
+        .section-title {
+            margin-bottom: var(--spacing-m);
+            color: var(--primary);
+        }
+
+        .subsection {
+            margin-bottom: var(--spacing-l);
+        }
+
+        .subsection:last-child {
+            margin-bottom: 0;
+        }
+
+        .subsection-title {
+            margin-bottom: var(--spacing-s);
+            color: var(--on-surface-variant);
+        }
+
+        /* Color Swatches */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--spacing-m);
+        }
+
+        .color-swatch {
+            border-radius: var(--radius-s);
+            overflow: hidden;
+            box-shadow: var(--elevation-1);
+        }
+
+        .color-preview {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .color-info {
+            padding: var(--spacing-s);
+            background: var(--surface-variant);
+        }
+
+        .color-name {
+            font-weight: 600;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .color-hex {
+            font-size: 11px;
+            color: var(--on-surface-variant);
+            font-family: monospace;
+        }
+
+        /* Button Styles */
+        .button-group {
+            display: flex;
+            gap: var(--spacing-s);
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-xs);
+            min-height: 48px;
+            padding: 12px 24px;
+            border-radius: var(--radius-s);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 150ms ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Primary Button */
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--on-primary);
+            box-shadow: var(--elevation-1);
+        }
+
+        .btn-primary:hover {
+            background-color: #6D28D9;
+        }
+
+        .btn-primary:active {
+            box-shadow: var(--elevation-0);
+            background-color: #5B21B6;
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.38;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Secondary Button */
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--outline);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(124, 58, 237, 0.08);
+        }
+
+        .btn-secondary:active {
+            background-color: rgba(124, 58, 237, 0.12);
+        }
+
+        .btn-secondary:disabled {
+            opacity: 0.38;
+            cursor: not-allowed;
+        }
+
+        /* Text Button */
+        .btn-text {
+            background-color: transparent;
+            color: var(--primary);
+            padding: 12px;
+        }
+
+        .btn-text:hover {
+            background-color: rgba(124, 58, 237, 0.08);
+        }
+
+        .btn-text:active {
+            background-color: rgba(124, 58, 237, 0.12);
+        }
+
+        .btn-text:disabled {
+            opacity: 0.38;
+            cursor: not-allowed;
+        }
+
+        /* Icon Button */
+        .btn-icon {
+            width: 48px;
+            height: 48px;
+            min-height: 48px;
+            padding: 0;
+            border-radius: var(--radius-full);
+            background-color: transparent;
+            color: var(--on-surface);
+        }
+
+        .btn-icon:hover {
+            background-color: rgba(31, 41, 55, 0.08);
+        }
+
+        .btn-icon:active {
+            background-color: rgba(31, 41, 55, 0.12);
+        }
+
+        /* Text Field Styles */
+        .text-field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            max-width: 400px;
+        }
+
+        .text-field-input-wrapper {
+            position: relative;
+        }
+
+        .text-field-input {
+            width: 100%;
+            min-height: 56px;
+            padding: 16px;
+            border: 1px solid var(--outline);
+            border-radius: var(--radius-s);
+            font-size: 16px;
+            font-family: inherit;
+            background-color: var(--surface);
+            color: var(--on-surface);
+            transition: border-color 150ms ease;
+        }
+
+        .text-field-input:focus {
+            outline: none;
+            border: 2px solid var(--primary);
+            padding: 15px; /* Adjust for thicker border */
+        }
+
+        .text-field-input.error {
+            border: 2px solid var(--error);
+            padding: 15px;
+        }
+
+        .text-field-input:disabled {
+            opacity: 0.38;
+            cursor: not-allowed;
+        }
+
+        .text-field-label {
+            font-size: 14px;
+            color: var(--on-surface-variant);
+            margin-bottom: 4px;
+        }
+
+        .text-field-helper {
+            font-size: 12px;
+            color: var(--on-surface-variant);
+        }
+
+        .text-field-helper.error {
+            color: var(--error);
+        }
+
+        .text-field-input.multiline {
+            min-height: 120px;
+            max-height: 240px;
+            resize: vertical;
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: var(--surface);
+            border-radius: var(--radius-m);
+            box-shadow: var(--elevation-1);
+            padding: var(--spacing-m);
+            transition: all 150ms ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            box-shadow: var(--elevation-2);
+        }
+
+        .card:active {
+            box-shadow: var(--elevation-0);
+            transform: translateY(1px);
+        }
+
+        .card-image {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-full);
+            background-color: var(--primary-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-xs);
+            color: var(--on-primary-container);
+            font-weight: 600;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--on-surface);
+        }
+
+        .card-description {
+            font-size: 14px;
+            color: var(--on-surface-variant);
+            margin-bottom: var(--spacing-s);
+        }
+
+        .card-meta {
+            font-size: 12px;
+            color: var(--on-surface-variant);
+            display: flex;
+            gap: var(--spacing-s);
+        }
+
+        /* Chip Styles */
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            height: 32px;
+            padding: 6px 12px;
+            border-radius: var(--radius-s);
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 150ms ease;
+            border: none;
+        }
+
+        .chip-filter {
+            background-color: var(--tertiary-container);
+            color: var(--on-tertiary-container);
+        }
+
+        .chip-filter.selected {
+            background-color: var(--tertiary);
+            color: var(--on-tertiary);
+        }
+
+        .chip-filter:hover {
+            opacity: 0.9;
+        }
+
+        /* Dialog Styles */
+        .dialog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.32);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .dialog-overlay.active {
+            display: flex;
+        }
+
+        .dialog {
+            background-color: var(--surface);
+            border-radius: var(--radius-l);
+            padding: var(--spacing-l);
+            box-shadow: var(--elevation-3);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .dialog-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto var(--spacing-m);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--error);
+            font-size: 32px;
+        }
+
+        .dialog-title {
+            font-size: 22px;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: var(--spacing-s);
+        }
+
+        .dialog-content {
+            font-size: 16px;
+            color: var(--on-surface-variant);
+            text-align: center;
+            margin-bottom: var(--spacing-l);
+        }
+
+        .dialog-actions {
+            display: flex;
+            gap: var(--spacing-xs);
+            justify-content: flex-end;
+        }
+
+        /* Loading Indicator */
+        .loading-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-m);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--outline-variant);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Error/Empty State */
+        .state-view {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: var(--spacing-l);
+        }
+
+        .state-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: var(--spacing-m);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--on-surface-variant);
+            font-size: 48px;
+            opacity: 0.6;
+        }
+
+        .state-title {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .state-message {
+            font-size: 16px;
+            color: var(--on-surface-variant);
+            margin-bottom: var(--spacing-l);
+        }
+
+        /* Grid Layout */
+        .component-grid {
+            display: grid;
+            gap: var(--spacing-m);
+        }
+
+        /* Icons (Simple SVG replacements) */
+        .icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: var(--spacing-xl);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: var(--primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .header p {
+            color: var(--on-surface-variant);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="headline-large">Grupper Design System</h1>
+            <p class="body-large">Interactive component mockup - Phase 1</p>
+        </div>
+
+        <!-- Color Palette Section -->
+        <section class="section">
+            <h2 class="headline-small section-title">Color Palette</h2>
+
+            <div class="subsection">
+                <h3 class="title-medium subsection-title">Primary Colors</h3>
+                <div class="color-grid">
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background-color: var(--primary); color: var(--on-primary);">Primary</div>
+                        <div class="color-info">
+                            <div class="color-name">Primary</div>
+                            <div class="color-hex">#7C3AED</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background-color: var(--primary-container); color: var(--on-primary-container);">Container</div>
+                        <div class="color-info">
+                            <div class="color-name">Primary Container</div>
+                            <div class="color-hex">#EDE9FE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3 class="title-medium subsection-title">Secondary Colors</h3>
+                <div class="color-grid">
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background-color: var(--secondary); color: var(--on-secondary);">Secondary</div>
+                        <div class="color-info">
+                            <div class="color-name">Secondary</div>
+                            <div class="color-hex">#14B8A6</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background-color: var(--secondary-container); color: var(--on-secondary-container);">Container</div>
+                        <div class="color-info">
+                            <div class="color-name">Secondary Container</div>
+                            <div class="color-hex">#CCFBF1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3 class="title-medium subsection-title">Tertiary Colors (Tags)</h3>
+                <div class="color-grid">
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background-color: var(--tertiary); color: var(--on-tertiary);">Tertiary</div>
+                        <div class="color-info">
+                            <div class="color-name">Tertiary</div>
+                            <div class="color-hex">#F59E0B</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background-color: var(--tertiary-container); color: var(--on-tertiary-container);">Container</div>
+                        <div class="color-info">
+                            <div class="color-name">Tertiary Container</div>
+                            <div class="color-hex">#FEF3C7</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3 class="title-medium subsection-title">Semantic Colors</h3>
+                <div class="color-grid">
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background-color: var(--error); color: var(--on-error);">Error</div>
+                        <div class="color-info">
+                            <div class="color-name">Error</div>
+                            <div class="color-hex">#EF4444</div>
+                        </div>
+                    </div>
+                    <div class="color-swatch">
+                        <div class="color-preview" style="background-color: var(--success); color: #FFFFFF;">Success</div>
+                        <div class="color-info">
+                            <div class="color-name">Success</div>
+                            <div class="color-hex">#10B981</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography Section -->
+        <section class="section">
+            <h2 class="headline-small section-title">Typography Scale</h2>
+            <div class="component-grid">
+                <div>
+                    <p class="display-small">Display Small - 36px</p>
+                    <p class="body-small" style="color: var(--on-surface-variant);">Used for large hero text</p>
+                </div>
+                <div>
+                    <p class="headline-large">Headline Large - 32px</p>
+                    <p class="body-small" style="color: var(--on-surface-variant);">Screen titles, main headers</p>
+                </div>
+                <div>
+                    <p class="headline-small">Headline Small - 24px</p>
+                    <p class="body-small" style="color: var(--on-surface-variant);">Card titles, section headers</p>
+                </div>
+                <div>
+                    <p class="title-large">Title Large - 22px</p>
+                    <p class="body-small" style="color: var(--on-surface-variant);">Dialog titles, prominent labels</p>
+                </div>
+                <div>
+                    <p class="title-medium">Title Medium - 16px SemiBold</p>
+                    <p class="body-small" style="color: var(--on-surface-variant);">List item titles, group names</p>
+                </div>
+                <div>
+                    <p class="body-large">Body Large - 16px - Main body text for posts and content</p>
+                </div>
+                <div>
+                    <p class="body-medium">Body Medium - 14px - Secondary body text, descriptions</p>
+                </div>
+                <div>
+                    <p class="body-small">Body Small - 12px - Captions, metadata, timestamps</p>
+                </div>
+                <div>
+                    <p class="label-large">Label Large - 14px SemiBold - Button text</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Button Components -->
+        <section class="section">
+            <h2 class="headline-small section-title">Buttons</h2>
+
+            <div class="subsection">
+                <h3 class="title-medium subsection-title">Primary Buttons (Main CTAs)</h3>
+                <div class="button-group">
+                    <button class="btn btn-primary">Create Group</button>
+                    <button class="btn btn-primary">Post</button>
+                    <button class="btn btn-primary" disabled>Disabled</button>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3 class="title-medium subsection-title">Secondary Buttons (Alternative Actions)</h3>
+                <div class="button-group">
+                    <button class="btn btn-secondary">Cancel</button>
+                    <button class="btn btn-secondary">Back</button>
+                    <button class="btn btn-secondary" disabled>Disabled</button>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3 class="title-medium subsection-title">Text Buttons (Tertiary Actions)</h3>
+                <div class="button-group">
+                    <button class="btn btn-text">Skip</button>
+                    <button class="btn btn-text">Learn More</button>
+                    <button class="btn btn-text" disabled>Disabled</button>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3 class="title-medium subsection-title">Icon Buttons (48×48dp touch target)</h3>
+                <div class="button-group">
+                    <button class="btn btn-icon">☰</button>
+                    <button class="btn btn-icon">🔍</button>
+                    <button class="btn btn-icon">✕</button>
+                    <button class="btn btn-icon">⋮</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Text Field Components -->
+        <section class="section">
+            <h2 class="headline-small section-title">Text Fields</h2>
+
+            <div class="component-grid">
+                <div class="subsection">
+                    <h3 class="title-medium subsection-title">Default State</h3>
+                    <div class="text-field">
+                        <label class="text-field-label">Group name</label>
+                        <input type="text" class="text-field-input" placeholder="Enter group name">
+                        <span class="text-field-helper">Choose a unique name for your group</span>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="title-medium subsection-title">Error State</h3>
+                    <div class="text-field">
+                        <label class="text-field-label">Author name</label>
+                        <input type="text" class="text-field-input error" placeholder="Enter your name" value="">
+                        <span class="text-field-helper error">⚠ This field is required</span>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="title-medium subsection-title">Multiline (Post Content)</h3>
+                    <div class="text-field">
+                        <label class="text-field-label">Post content</label>
+                        <textarea class="text-field-input multiline" placeholder="Write your post..."></textarea>
+                        <span class="text-field-helper">Share your thoughts with the group</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Card Components -->
+        <section class="section">
+            <h2 class="headline-small section-title">Cards</h2>
+
+            <div class="subsection">
+                <h3 class="title-medium subsection-title">Group Card Example</h3>
+                <div style="max-width: 400px;">
+                    <div class="card">
+                        <div class="card-image">GR</div>
+                        <div class="card-title">Grupper Developers</div>
+                        <div class="card-description">A community for developers building with Grupper</div>
+                        <div class="card-meta">
+                            <span>👥 248 members</span>
+                            <span>💬 1,234 posts</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3 class="title-medium subsection-title">Post Card Example</h3>
+                <div style="max-width: 600px;">
+                    <div class="card">
+                        <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                            <span class="chip chip-filter selected">Discussion</span>
+                            <span class="body-small" style="color: var(--on-surface-variant);">2 hours ago</span>
+                        </div>
+                        <div class="card-title">How to implement nested comments?</div>
+                        <div class="card-description">I'm trying to build a threaded comment system similar to Reddit. What's the best database schema for this?</div>
+                        <div class="card-meta">
+                            <span>By Alex Johnson</span>
+                            <span>💬 24 comments</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chip Components -->
+        <section class="section">
+            <h2 class="headline-small section-title">Tag Chips</h2>
+
+            <div class="subsection">
+                <h3 class="title-medium subsection-title">Filter Chips (Tappable)</h3>
+                <div class="button-group">
+                    <button class="chip chip-filter">All Posts</button>
+                    <button class="chip chip-filter selected">Discussion</button>
+                    <button class="chip chip-filter">Question</button>
+                    <button class="chip chip-filter">News</button>
+                    <button class="chip chip-filter">Tutorial</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dialog Component -->
+        <section class="section">
+            <h2 class="headline-small section-title">Dialog</h2>
+
+            <div class="subsection">
+                <h3 class="title-medium subsection-title">Alert Dialog Example</h3>
+                <button class="btn btn-primary" onclick="document.getElementById('exampleDialog').classList.add('active')">
+                    Show Dialog
+                </button>
+            </div>
+        </section>
+
+        <!-- Loading Indicator -->
+        <section class="section">
+            <h2 class="headline-small section-title">Loading States</h2>
+
+            <div class="subsection">
+                <h3 class="title-medium subsection-title">Circular Progress Indicator</h3>
+                <div class="loading-indicator">
+                    <div class="spinner"></div>
+                    <p class="body-medium" style="color: var(--on-surface-variant);">Loading groups...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Error/Empty States -->
+        <section class="section">
+            <h2 class="headline-small section-title">Error & Empty States</h2>
+
+            <div class="subsection">
+                <h3 class="title-medium subsection-title">Error State</h3>
+                <div class="state-view" style="background: var(--surface-variant); border-radius: var(--radius-m);">
+                    <div class="state-icon">☁️✕</div>
+                    <div class="state-title">Connection error</div>
+                    <div class="state-message">Please check your internet connection and try again.</div>
+                    <button class="btn btn-primary">Try Again</button>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3 class="title-medium subsection-title">Empty State</h3>
+                <div class="state-view" style="background: var(--surface-variant); border-radius: var(--radius-m);">
+                    <div class="state-icon">👥</div>
+                    <div class="state-title">No groups yet</div>
+                    <div class="state-message">Create your first group to start discussions</div>
+                    <button class="btn btn-primary">+ Create Group</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Spacing Scale -->
+        <section class="section">
+            <h2 class="headline-small section-title">Spacing Scale (8dp Grid)</h2>
+            <div class="component-grid">
+                <div>
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+                        <div style="width: 4px; height: 32px; background: var(--primary);"></div>
+                        <span class="body-medium">XXS - 4dp</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+                        <div style="width: 8px; height: 32px; background: var(--primary);"></div>
+                        <span class="body-medium">XS - 8dp</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+                        <div style="width: 12px; height: 32px; background: var(--primary);"></div>
+                        <span class="body-medium">S - 12dp</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+                        <div style="width: 16px; height: 32px; background: var(--primary);"></div>
+                        <span class="body-medium">M - 16dp (most common)</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+                        <div style="width: 24px; height: 32px; background: var(--primary);"></div>
+                        <span class="body-medium">L - 24dp</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 8px;">
+                        <div style="width: 32px; height: 32px; background: var(--primary);"></div>
+                        <span class="body-medium">XL - 32dp</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <div style="width: 48px; height: 32px; background: var(--primary);"></div>
+                        <span class="body-medium">XXL - 48dp (touch target)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Dialog Overlay -->
+    <div class="dialog-overlay" id="exampleDialog" onclick="this.classList.remove('active')">
+        <div class="dialog" onclick="event.stopPropagation()">
+            <div class="dialog-icon">🗑️</div>
+            <div class="dialog-title">Delete group?</div>
+            <div class="dialog-content">This action cannot be undone. All posts and comments will be permanently deleted.</div>
+            <div class="dialog-actions">
+                <button class="btn btn-text" onclick="document.getElementById('exampleDialog').classList.remove('active')">Cancel</button>
+                <button class="btn btn-text" style="color: var(--error);" onclick="document.getElementById('exampleDialog').classList.remove('active')">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add ripple effect to buttons
+        document.querySelectorAll('.btn, .card, .chip').forEach(element => {
+            element.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.5);
+                    top: ${y}px;
+                    left: ${x}px;
+                    pointer-events: none;
+                    animation: ripple 600ms ease-out;
+                `;
+
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                from {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

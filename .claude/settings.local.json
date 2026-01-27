@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gradle wrapper:*)",
+      "Bash(brew list:*)",
+      "Bash(JAVA_HOME=/opt/homebrew/opt/openjdk@21 ./gradlew:*)",
+      "Bash(./gradlew :composeApp:compileKotlinAndroid:*)",
+      "Bash(cd:*)"
+    ]
+  }
+}

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grupper - Create Group</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation between mockups -->
+  <nav class="mockup-nav">
+    <a href="groups-list.html">Groups List</a>
+    <a href="group-detail.html">Group Detail</a>
+    <a href="post-detail.html">Post Detail</a>
+    <a href="create-group.html" class="active">Create Group</a>
+    <a href="create-post.html">Create Post</a>
+    <a href="manage-tags.html">Manage Tags</a>
+  </nav>
+
+  <p class="page-title">Create Group Screen</p>
+
+  <!-- Phone Frame -->
+  <div class="phone-frame">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="icons">
+        <span>signal</span>
+        <span>wifi</span>
+        <span>battery</span>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <a href="groups-list.html" class="nav-link">
+        <button class="icon-btn" title="Close">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </a>
+      <span class="app-bar-title center">Create Group</span>
+      <button class="btn-text" style="font-size: 14px; padding: 0 8px;">Save</button>
+    </div>
+
+    <!-- Content -->
+    <div class="content content-white" style="padding: 16px;">
+      <!-- Image Picker -->
+      <div class="image-picker" style="margin-bottom: 24px;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+          <polyline points="21 15 16 10 5 21"></polyline>
+        </svg>
+        <span>Tap to add group image</span>
+        <span style="font-size: 12px;">Recommended: 400x400px</span>
+      </div>
+
+      <!-- Form Fields -->
+      <div class="text-field">
+        <label>Group Name *</label>
+        <input type="text" placeholder="Enter group name" value="Kotlin Developers" />
+        <span class="helper">2/50 characters</span>
+      </div>
+
+      <div class="text-field">
+        <label>Description</label>
+        <textarea placeholder="What is this group about?">A community for Kotlin enthusiasts to share tips, tricks, and discuss the latest features.</textarea>
+        <span class="helper">92/500 characters</span>
+      </div>
+
+      <!-- Info Box -->
+      <div style="background: var(--surface); border-radius: 12px; padding: 16px; margin-top: 24px;">
+        <div style="display: flex; align-items: flex-start; gap: 12px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <div>
+            <p style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">What happens next?</p>
+            <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.5;">
+              After creating your group, you can add custom tags to organize posts. Anyone will be able to join and post.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Button -->
+      <button class="btn btn-primary" style="width: 100%; margin-top: 32px;">
+        Create Group
+      </button>
+    </div>
+  </div>
+
+  <!-- Second Phone: With Image -->
+  <p class="page-title">Create Group (with image selected)</p>
+
+  <div class="phone-frame">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="icons">
+        <span>signal</span>
+        <span>wifi</span>
+        <span>battery</span>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <a href="groups-list.html" class="nav-link">
+        <button class="icon-btn" title="Close">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </a>
+      <span class="app-bar-title center">Create Group</span>
+      <button class="btn-text" style="font-size: 14px; padding: 0 8px; color: var(--primary); font-weight: 600;">Save</button>
+    </div>
+
+    <!-- Content -->
+    <div class="content content-white" style="padding: 16px;">
+      <!-- Image Picker with image -->
+      <div class="image-picker has-image" style="margin-bottom: 24px; background: url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=400') center/cover; position: relative;">
+        <div style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.6); border-radius: 20px; padding: 6px 12px; color: white; font-size: 12px; display: flex; align-items: center; gap: 4px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+          </svg>
+          Change
+        </div>
+      </div>
+
+      <!-- Form Fields -->
+      <div class="text-field">
+        <label>Group Name *</label>
+        <input type="text" placeholder="Enter group name" value="Code & Coffee" />
+        <span class="helper">13/50 characters</span>
+      </div>
+
+      <div class="text-field">
+        <label>Description</label>
+        <textarea placeholder="What is this group about?">A casual group for developers who love coffee and coding. Share your setup, favorite brews, and programming tips.</textarea>
+        <span class="helper">124/500 characters</span>
+      </div>
+
+      <!-- Info Box -->
+      <div style="background: var(--surface); border-radius: 12px; padding: 16px; margin-top: 24px;">
+        <div style="display: flex; align-items: flex-start; gap: 12px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <div>
+            <p style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">What happens next?</p>
+            <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.5;">
+              After creating your group, you can add custom tags to organize posts. Anyone will be able to join and post.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Button -->
+      <button class="btn btn-primary" style="width: 100%; margin-top: 32px;">
+        Create Group
+      </button>
+    </div>
+  </div>
+
+  <!-- Third Phone: Validation Error State -->
+  <p class="page-title">Create Group (validation error)</p>
+
+  <div class="phone-frame">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="icons">
+        <span>signal</span>
+        <span>wifi</span>
+        <span>battery</span>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <button class="icon-btn" title="Close">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <span class="app-bar-title center">Create Group</span>
+      <button class="btn-text" style="font-size: 14px; padding: 0 8px; opacity: 0.5;">Save</button>
+    </div>
+
+    <!-- Content -->
+    <div class="content content-white" style="padding: 16px;">
+      <!-- Image Picker -->
+      <div class="image-picker" style="margin-bottom: 24px;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <circle cx="8.5" cy="8.5" r="1.5"></circle>
+          <polyline points="21 15 16 10 5 21"></polyline>
+        </svg>
+        <span>Tap to add group image</span>
+        <span style="font-size: 12px;">Recommended: 400x400px</span>
+      </div>
+
+      <!-- Form Fields with error -->
+      <div class="text-field error">
+        <label>Group Name *</label>
+        <input type="text" placeholder="Enter group name" value="" style="border-color: var(--error);" />
+        <span class="helper">Group name is required</span>
+      </div>
+
+      <div class="text-field">
+        <label>Description</label>
+        <textarea placeholder="What is this group about?"></textarea>
+        <span class="helper">0/500 characters</span>
+      </div>
+
+      <!-- Info Box -->
+      <div style="background: var(--surface); border-radius: 12px; padding: 16px; margin-top: 24px;">
+        <div style="display: flex; align-items: flex-start; gap: 12px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+          <div>
+            <p style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">What happens next?</p>
+            <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.5;">
+              After creating your group, you can add custom tags to organize posts. Anyone will be able to join and post.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Button (disabled) -->
+      <button class="btn btn-primary" style="width: 100%; margin-top: 32px; opacity: 0.5; cursor: not-allowed;">
+        Create Group
+      </button>
+    </div>
+  </div>
+</body>
+</html>

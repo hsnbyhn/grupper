@@ -1,0 +1,44 @@
+name: Mobile iOS CI
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'mobile/**'
+      - '.github/workflows/mobile-ios-ci.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'mobile/**'
+      - '.github/workflows/mobile-ios-ci.yml'
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      working-directory: ./mobile
+      run: chmod +x gradlew
+
+    - name: Build iOS Framework
+      working-directory: ./mobile
+      run: ./gradlew :composeApp:compileKotlinIosSimulatorArm64 --no-daemon
+
+    - name: Upload iOS build artifacts
+      if: success()
+      uses: actions/upload-artifact@v4
+      with:
+        name: ios-framework
+        path: mobile/composeApp/build/bin/iosSimulatorArm64/
+        retention-days: 7

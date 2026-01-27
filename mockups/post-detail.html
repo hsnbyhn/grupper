@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grupper - Post Detail</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation between mockups -->
+  <nav class="mockup-nav">
+    <a href="groups-list.html">Groups List</a>
+    <a href="group-detail.html">Group Detail</a>
+    <a href="post-detail.html" class="active">Post Detail</a>
+    <a href="create-group.html">Create Group</a>
+    <a href="create-post.html">Create Post</a>
+    <a href="manage-tags.html">Manage Tags</a>
+  </nav>
+
+  <p class="page-title">Post Detail Screen</p>
+
+  <!-- Phone Frame -->
+  <div class="phone-frame">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="icons">
+        <span>signal</span>
+        <span>wifi</span>
+        <span>battery</span>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <a href="group-detail.html" class="nav-link">
+        <button class="icon-btn" title="Back">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+      </a>
+      <span class="app-bar-title">Post</span>
+      <button class="icon-btn" title="More options">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="5" r="2"></circle>
+          <circle cx="12" cy="12" r="2"></circle>
+          <circle cx="12" cy="19" r="2"></circle>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Content -->
+    <div class="content content-white" style="padding-bottom: 60px;">
+      <!-- Post Full Content -->
+      <div class="post-full">
+        <div class="post-full-header">
+          <span class="tag tag-colored" style="background: #8B5CF6;">General</span>
+          <span class="text-sm text-secondary">by Sarah Chen</span>
+        </div>
+        <div class="text-xs text-tertiary" style="margin-bottom: 12px;">
+          Jan 15, 2026 at 2:34 PM &bull; 42 comments
+        </div>
+
+        <h1 class="post-full-title">Kotlin 2.0 is finally here! What are your favorite new features?</h1>
+
+        <p class="post-full-content">
+          I've been playing with the new K2 compiler for the past few weeks and I have to say - the performance improvements are incredible! Compilation times have dropped by almost 50% in our large project.
+          <br><br>
+          The context receivers are also game-changing for DSL design. We've already started refactoring some of our internal DSLs to take advantage of this feature.
+          <br><br>
+          Some of my favorite features:
+          <br><br>
+          &bull; K2 compiler with much faster compilation<br>
+          &bull; Stable context receivers<br>
+          &bull; New enum entries<br>
+          &bull; Better smart casts<br>
+          <br>
+          What are your thoughts? What features are you most excited about?
+        </p>
+
+        <div class="post-full-image" style="background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800') center/cover;">
+        </div>
+      </div>
+
+      <!-- Comments Section -->
+      <div class="section-divider">Comments (42)</div>
+
+      <!-- Comments -->
+      <div style="background: white;">
+        <!-- Comment 1 -->
+        <div class="comment">
+          <div class="comment-header">
+            <div class="comment-avatar" style="background: #E0E7FF; color: #4F46E5;">M</div>
+            <span class="comment-author">Mike Johnson</span>
+            <span class="comment-time">&bull; 1h ago</span>
+          </div>
+          <p class="comment-content">The K2 compiler is a game changer! Our CI build times went from 8 minutes to under 4. Absolutely worth the upgrade.</p>
+          <div class="comment-actions">
+            <button class="comment-reply-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 14 4 9 9 4"></polyline>
+                <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+              </svg>
+              Reply
+            </button>
+          </div>
+
+          <!-- Nested Reply -->
+          <div class="comment-nested">
+            <div class="comment">
+              <div class="comment-header">
+                <div class="comment-avatar" style="background: #FCE7F3; color: #DB2777;">S</div>
+                <span class="comment-author">Sarah Chen</span>
+                <span class="comment-time">&bull; 45m ago</span>
+              </div>
+              <p class="comment-content">That's amazing! What kind of project are you working on? We saw similar improvements on our Android app.</p>
+              <div class="comment-actions">
+                <button class="comment-reply-btn">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 14 4 9 9 4"></polyline>
+                    <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+                  </svg>
+                  Reply
+                </button>
+              </div>
+
+              <!-- Level 2 nested -->
+              <div class="comment-nested">
+                <div class="comment">
+                  <div class="comment-header">
+                    <div class="comment-avatar" style="background: #E0E7FF; color: #4F46E5;">M</div>
+                    <span class="comment-author">Mike Johnson</span>
+                    <span class="comment-time">&bull; 30m ago</span>
+                  </div>
+                  <p class="comment-content">It's a KMP project targeting Android, iOS, and desktop. The shared module has about 200k lines of Kotlin code.</p>
+                  <div class="comment-actions">
+                    <button class="comment-reply-btn">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 14 4 9 9 4"></polyline>
+                        <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+                      </svg>
+                      Reply
+                    </button>
+                  </div>
+                </div>
+
+                <!-- View more link -->
+                <div style="padding: 8px 0; padding-left: 16px;">
+                  <a href="#" style="color: var(--primary); font-size: 12px; text-decoration: none;">View 3 more replies</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comment 2 -->
+        <div class="comment">
+          <div class="comment-header">
+            <div class="comment-avatar" style="background: #D1FAE5; color: #059669;">E</div>
+            <span class="comment-author">Emma Wilson</span>
+            <span class="comment-time">&bull; 2h ago</span>
+          </div>
+          <p class="comment-content">Context receivers are what I've been waiting for! No more passing context parameters through 5 layers of functions. This is going to clean up so much code.</p>
+          <div class="comment-actions">
+            <button class="comment-reply-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 14 4 9 9 4"></polyline>
+                <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+              </svg>
+              Reply
+            </button>
+          </div>
+        </div>
+
+        <!-- Comment 3 -->
+        <div class="comment">
+          <div class="comment-header">
+            <div class="comment-avatar" style="background: #FEF3C7; color: #D97706;">A</div>
+            <span class="comment-author">Alex Kumar</span>
+            <span class="comment-time">&bull; 2h ago</span>
+          </div>
+          <p class="comment-content">Has anyone tried the new smart cast improvements with sealed classes? I heard they finally work across when branches properly.</p>
+          <div class="comment-actions">
+            <button class="comment-reply-btn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 14 4 9 9 4"></polyline>
+                <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+              </svg>
+              Reply
+            </button>
+          </div>
+
+          <!-- Nested Reply -->
+          <div class="comment-nested">
+            <div class="comment">
+              <div class="comment-header">
+                <div class="comment-avatar" style="background: #E0E7FF; color: #4F46E5;">J</div>
+                <span class="comment-author">Jamie Lee</span>
+                <span class="comment-time">&bull; 1h ago</span>
+              </div>
+              <p class="comment-content">Yes! It works beautifully now. No more @Suppress("UNCHECKED_CAST") hacks needed.</p>
+              <div class="comment-actions">
+                <button class="comment-reply-btn">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 14 4 9 9 4"></polyline>
+                    <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+                  </svg>
+                  Reply
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comment Input Bar (Sticky) -->
+    <div class="comment-input-bar" style="position: absolute; bottom: 0; left: 0; right: 0;">
+      <input type="text" placeholder="Add a comment..." />
+      <button class="send-btn" title="Send">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grupper - Manage Tags</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation between mockups -->
+  <nav class="mockup-nav">
+    <a href="groups-list.html">Groups List</a>
+    <a href="group-detail.html">Group Detail</a>
+    <a href="post-detail.html">Post Detail</a>
+    <a href="create-group.html">Create Group</a>
+    <a href="create-post.html">Create Post</a>
+    <a href="manage-tags.html" class="active">Manage Tags</a>
+  </nav>
+
+  <p class="page-title">Manage Tags Screen</p>
+
+  <!-- Phone Frame -->
+  <div class="phone-frame">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="icons">
+        <span>signal</span>
+        <span>wifi</span>
+        <span>battery</span>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <a href="group-detail.html" class="nav-link">
+        <button class="icon-btn" title="Back">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+      </a>
+      <span class="app-bar-title">Manage Tags</span>
+      <button class="icon-btn" title="Add Tag" style="color: var(--primary);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Content -->
+    <div class="content content-white">
+      <!-- Tag Rows -->
+      <div class="tag-row">
+        <span class="tag-color-dot" style="background: #8B5CF6;"></span>
+        <span class="tag-name">General</span>
+        <div class="tag-actions">
+          <button class="icon-btn" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+          </button>
+          <button class="icon-btn" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="tag-row">
+        <span class="tag-color-dot" style="background: #3B82F6;"></span>
+        <span class="tag-name">Questions</span>
+        <div class="tag-actions">
+          <button class="icon-btn" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+          </button>
+          <button class="icon-btn" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="tag-row">
+        <span class="tag-color-dot" style="background: #22C55E;"></span>
+        <span class="tag-name">Tips</span>
+        <div class="tag-actions">
+          <button class="icon-btn" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+          </button>
+          <button class="icon-btn" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="tag-row">
+        <span class="tag-color-dot" style="background: #F59E0B;"></span>
+        <span class="tag-name">News</span>
+        <div class="tag-actions">
+          <button class="icon-btn" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+          </button>
+          <button class="icon-btn" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="tag-row">
+        <span class="tag-color-dot" style="background: #EC4899;"></span>
+        <span class="tag-name">Jobs</span>
+        <div class="tag-actions">
+          <button class="icon-btn" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+          </button>
+          <button class="icon-btn" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Help text -->
+      <div style="padding: 24px 16px; text-align: center; color: var(--text-tertiary); font-size: 14px;">
+        Tags help organize posts in your group.<br>
+        Tap + to add a new tag.
+      </div>
+    </div>
+  </div>
+
+  <!-- Second Phone: Edit Mode Expanded -->
+  <p class="page-title">Manage Tags (editing a tag)</p>
+
+  <div class="phone-frame">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="icons">
+        <span>signal</span>
+        <span>wifi</span>
+        <span>battery</span>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <button class="icon-btn" title="Back">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </button>
+      <span class="app-bar-title">Manage Tags</span>
+      <button class="icon-btn" title="Add Tag" style="color: var(--primary);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Content -->
+    <div class="content content-white">
+      <!-- Regular Tag Row -->
+      <div class="tag-row">
+        <span class="tag-color-dot" style="background: #8B5CF6;"></span>
+        <span class="tag-name">General</span>
+        <div class="tag-actions">
+          <button class="icon-btn" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+          </button>
+          <button class="icon-btn" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Expanded Edit Row -->
+      <div style="background: var(--surface); border-bottom: 1px solid var(--outline); padding: 16px;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+          <span class="tag-color-dot" style="background: #3B82F6; width: 20px; height: 20px;"></span>
+          <span style="font-weight: 600;">Editing: Questions</span>
+        </div>
+
+        <!-- Name Input -->
+        <div class="text-field" style="margin-bottom: 16px;">
+          <label style="font-size: 13px;">Tag Name</label>
+          <input type="text" value="Questions" style="height: 44px;" />
+        </div>
+
+        <!-- Color Picker -->
+        <div style="margin-bottom: 16px;">
+          <label style="font-size: 13px; font-weight: 500; display: block; margin-bottom: 8px;">Color</label>
+          <div class="color-picker">
+            <span class="color-option" style="background: #EF4444;"></span>
+            <span class="color-option" style="background: #F97316;"></span>
+            <span class="color-option" style="background: #F59E0B;"></span>
+            <span class="color-option" style="background: #22C55E;"></span>
+            <span class="color-option" style="background: #14B8A6;"></span>
+            <span class="color-option selected" style="background: #3B82F6;"></span>
+            <span class="color-option" style="background: #8B5CF6;"></span>
+            <span class="color-option" style="background: #EC4899;"></span>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display: flex; gap: 12px; justify-content: flex-end;">
+          <button class="btn btn-secondary" style="height: 40px; padding: 0 20px;">Cancel</button>
+          <button class="btn btn-primary" style="height: 40px; padding: 0 20px;">Save</button>
+        </div>
+      </div>
+
+      <!-- Rest of tags -->
+      <div class="tag-row">
+        <span class="tag-color-dot" style="background: #22C55E;"></span>
+        <span class="tag-name">Tips</span>
+        <div class="tag-actions">
+          <button class="icon-btn" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+          </button>
+          <button class="icon-btn" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="tag-row">
+        <span class="tag-color-dot" style="background: #F59E0B;"></span>
+        <span class="tag-name">News</span>
+        <div class="tag-actions">
+          <button class="icon-btn" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+          </button>
+          <button class="icon-btn" style="width: 36px; height: 36px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-tertiary)" stroke-width="2">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Third Phone: Delete Confirmation Dialog -->
+  <p class="page-title">Manage Tags (delete confirmation)</p>
+
+  <div class="phone-frame">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="icons">
+        <span>signal</span>
+        <span>wifi</span>
+        <span>battery</span>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <button class="icon-btn" title="Back">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </button>
+      <span class="app-bar-title">Manage Tags</span>
+      <button class="icon-btn" title="Add Tag" style="color: var(--primary);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Content (dimmed) -->
+    <div class="content content-white" style="opacity: 0.3;">
+      <div class="tag-row">
+        <span class="tag-color-dot" style="background: #8B5CF6;"></span>
+        <span class="tag-name">General</span>
+      </div>
+      <div class="tag-row">
+        <span class="tag-color-dot" style="background: #3B82F6;"></span>
+        <span class="tag-name">Questions</span>
+      </div>
+      <div class="tag-row">
+        <span class="tag-color-dot" style="background: #22C55E;"></span>
+        <span class="tag-name">Tips</span>
+      </div>
+    </div>
+
+    <!-- Dialog Overlay -->
+    <div class="dialog-overlay">
+      <div class="dialog">
+        <h3>Delete Tag?</h3>
+        <p>Are you sure you want to delete "Jobs"? Posts with this tag will become untagged.</p>
+        <div class="dialog-actions">
+          <button class="btn btn-text">Cancel</button>
+          <button class="btn" style="background: var(--error); color: white;">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fourth Phone: Empty State -->
+  <p class="page-title">Manage Tags (empty state)</p>
+
+  <div class="phone-frame">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="icons">
+        <span>signal</span>
+        <span>wifi</span>
+        <span>battery</span>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <button class="icon-btn" title="Back">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+      </button>
+      <span class="app-bar-title">Manage Tags</span>
+      <button class="icon-btn" title="Add Tag" style="color: var(--primary);">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Empty State Content -->
+    <div class="content content-white">
+      <div class="empty-state">
+        <div class="empty-state-icon">
+          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+        </div>
+        <h3>No tags yet</h3>
+        <p>Create tags to help organize posts in your group</p>
+        <button class="btn btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Create First Tag
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

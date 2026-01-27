@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grupper - Group Detail</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation between mockups -->
+  <nav class="mockup-nav">
+    <a href="groups-list.html">Groups List</a>
+    <a href="group-detail.html" class="active">Group Detail</a>
+    <a href="post-detail.html">Post Detail</a>
+    <a href="create-group.html">Create Group</a>
+    <a href="create-post.html">Create Post</a>
+    <a href="manage-tags.html">Manage Tags</a>
+  </nav>
+
+  <p class="page-title">Group Detail Screen</p>
+
+  <!-- Phone Frame -->
+  <div class="phone-frame">
+    <!-- Status Bar -->
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="icons">
+        <span>signal</span>
+        <span>wifi</span>
+        <span>battery</span>
+      </div>
+    </div>
+
+    <!-- App Bar -->
+    <div class="app-bar">
+      <a href="groups-list.html" class="nav-link">
+        <button class="icon-btn" title="Back">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+      </a>
+      <span class="app-bar-title">Kotlin Developers</span>
+      <button class="icon-btn" title="More options">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="5" r="2"></circle>
+          <circle cx="12" cy="12" r="2"></circle>
+          <circle cx="12" cy="19" r="2"></circle>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+      <!-- Group Header -->
+      <div class="group-header">
+        <div class="group-header-image" style="background: linear-gradient(135deg, #7C3AED, #A78BFA);">
+          <span style="color: white; font-size: 32px;">K</span>
+        </div>
+        <h1>Kotlin Developers</h1>
+        <p>A community for Kotlin enthusiasts to share tips, tricks, and discuss the latest features.</p>
+        <div class="group-header-stats">
+          <div><span>1.2k</span> members</div>
+          <div><span>324</span> posts</div>
+        </div>
+      </div>
+
+      <!-- Tags Filter -->
+      <div class="tags-row">
+        <span class="tag selected">All</span>
+        <span class="tag" style="background: rgba(139, 92, 246, 0.15); color: #7C3AED;">General</span>
+        <span class="tag" style="background: rgba(59, 130, 246, 0.15); color: #3B82F6;">Questions</span>
+        <span class="tag" style="background: rgba(34, 197, 94, 0.15); color: #22C55E;">Tips</span>
+        <span class="tag" style="background: rgba(245, 158, 11, 0.15); color: #F59E0B;">News</span>
+        <span class="tag" style="background: rgba(236, 72, 153, 0.15); color: #EC4899;">Jobs</span>
+      </div>
+
+      <!-- Sort Bar -->
+      <div class="sort-bar">
+        <span class="text-sm text-secondary">324 posts</span>
+        <select>
+          <option>Newest first</option>
+          <option>Oldest first</option>
+          <option>Most commented</option>
+        </select>
+      </div>
+
+      <!-- Post Cards -->
+      <a href="post-detail.html" class="nav-link">
+        <div class="post-card">
+          <div class="post-header">
+            <span class="tag tag-colored" style="background: #8B5CF6;">General</span>
+          </div>
+          <div class="post-title">Kotlin 2.0 is finally here! What are your favorite new features?</div>
+          <div class="post-preview">I've been playing with the new K2 compiler and the performance improvements are incredible. The context receivers are also game-changing for DSL design...</div>
+          <div class="post-meta">
+            <span>by Sarah Chen</span>
+            <span>2h ago</span>
+            <span>42 comments</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="post-detail.html" class="nav-link">
+        <div class="post-card">
+          <div class="post-header">
+            <span class="tag tag-colored" style="background: #3B82F6;">Questions</span>
+          </div>
+          <div class="post-title">Best practices for error handling in Kotlin coroutines?</div>
+          <div class="post-preview">I'm building a network layer with Retrofit and coroutines. What's the recommended way to handle exceptions? Should I use try-catch, Result, or sealed classes?</div>
+          <div class="post-meta">
+            <span>by Mike Johnson</span>
+            <span>5h ago</span>
+            <span>18 comments</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="post-detail.html" class="nav-link">
+        <div class="post-card">
+          <div class="post-header">
+            <span class="tag tag-colored" style="background: #22C55E;">Tips</span>
+          </div>
+          <div class="post-title">5 Kotlin extension functions I use in every project</div>
+          <div class="post-preview">After years of Kotlin development, these are the extension functions I copy to every new project. They've saved me countless hours of boilerplate code...</div>
+          <div class="post-meta">
+            <span>by Emma Wilson</span>
+            <span>1d ago</span>
+            <span>67 comments</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="post-detail.html" class="nav-link">
+        <div class="post-card">
+          <div class="post-header">
+            <span class="tag tag-colored" style="background: #F59E0B;">News</span>
+          </div>
+          <div class="post-title">JetBrains announces Kotlin Multiplatform stable release</div>
+          <div class="post-preview">Big news! KMP is now officially stable. This means we can finally use it in production without worrying about breaking changes...</div>
+          <div class="post-meta">
+            <span>by Alex Kumar</span>
+            <span>2d ago</span>
+            <span>89 comments</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="post-detail.html" class="nav-link">
+        <div class="post-card">
+          <div class="post-header">
+            <span class="tag tag-colored" style="background: #EC4899;">Jobs</span>
+          </div>
+          <div class="post-title">[Hiring] Senior Kotlin Developer - Remote (US/EU)</div>
+          <div class="post-preview">We're looking for an experienced Kotlin developer to join our fintech team. Competitive salary, full remote, and great benefits...</div>
+          <div class="post-meta">
+            <span>by TechCorp HR</span>
+            <span>3d ago</span>
+            <span>12 comments</span>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- FAB -->
+    <a href="create-post.html" class="nav-link">
+      <button class="fab" title="Create Post">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+      </button>
+    </a>
+  </div>
+</body>
+</html>
