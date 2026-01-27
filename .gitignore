@@ -136,11 +136,6 @@ mobile/build/
 mobile/composeApp/build/
 mobile/iosApp/build/
 
-# ============================================
-# Old/deprecated directories (not in use)
-# ============================================
-composeApp/
-iosApp/
 
 # ============================================
 # Design mockups (optional - uncomment if you want to ignore)
