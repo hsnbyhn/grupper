@@ -14,6 +14,7 @@ import androidx.navigation.toRoute
 import com.grupper.ui.screens.GroupsListScreen
 import com.grupper.ui.screens.GroupDetailScreen
 import com.grupper.ui.screens.PostDetailScreen
+import com.grupper.ui.screens.CreateEditGroupScreen
 
 /**
  * Grupper Navigation Graph
@@ -120,7 +121,7 @@ fun GrupperNavHost(
                 ) + fadeOut(animationSpec = tween(ANIMATION_DURATION))
             }
         ) {
-            CreateEditGroupPlaceholder(
+            CreateEditGroupScreen(
                 groupId = null,
                 onBackClick = { navController.popBackStack() },
                 onSaveSuccess = { navController.popBackStack() }
@@ -150,7 +151,7 @@ fun GrupperNavHost(
             }
         ) { backStackEntry ->
             val route = backStackEntry.toRoute<Screen.EditGroup>()
-            CreateEditGroupPlaceholder(
+            CreateEditGroupScreen(
                 groupId = route.groupId,
                 onBackClick = { navController.popBackStack() },
                 onSaveSuccess = { navController.popBackStack() }
