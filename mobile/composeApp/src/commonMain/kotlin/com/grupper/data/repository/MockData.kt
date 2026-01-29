@@ -12,6 +12,92 @@ import com.grupper.data.model.TagInfo
  */
 object MockData {
 
+    // All tags across all groups
+    val tags = listOf(
+        // Group 1 - Kotlin Developers
+        Tag(1, 1, "General", "#7C3AED", "2024-12-30T10:00:00Z"),
+        Tag(2, 1, "Question", "#14B8A6", "2024-12-30T10:00:00Z"),
+        Tag(3, 1, "Tutorial", "#F59E0B", "2024-12-30T10:00:00Z"),
+        Tag(4, 1, "News", "#EF4444", "2024-12-30T10:00:00Z"),
+        // Group 2 - Android Dev Community
+        Tag(5, 2, "Compose", "#7C3AED", "2024-11-30T10:00:00Z"),
+        Tag(6, 2, "Architecture", "#14B8A6", "2024-11-30T10:00:00Z"),
+        Tag(7, 2, "Help", "#F59E0B", "2024-11-30T10:00:00Z"),
+        // Group 3-5 - Default tags
+        Tag(103, 3, "General", "#7C3AED", "2024-12-15T10:00:00Z"),
+        Tag(104, 3, "Discussion", "#14B8A6", "2024-12-15T10:00:00Z"),
+        Tag(104, 4, "General", "#7C3AED", "2024-12-15T10:00:00Z"),
+        Tag(105, 4, "Discussion", "#14B8A6", "2024-12-15T10:00:00Z"),
+        Tag(105, 5, "General", "#7C3AED", "2024-12-15T10:00:00Z"),
+        Tag(106, 5, "Discussion", "#14B8A6", "2024-12-15T10:00:00Z")
+    )
+
+    // All posts across all groups
+    val posts = listOf(
+        // Group 1 - Kotlin Developers
+        Post(
+            id = 1,
+            groupId = 1,
+            title = "Kotlin 2.0 is here! What's new?",
+            content = "Let's discuss the new features in Kotlin 2.0 including the new K2 compiler...",
+            authorName = "Sarah Chen",
+            imageUrl = null,
+            tag = TagInfo(4, "News", "#EF4444"),
+            commentCount = 42,
+            createdAt = "2025-01-21T10:00:00Z",
+            updatedAt = "2025-01-21T10:00:00Z"
+        ),
+        Post(
+            id = 2,
+            groupId = 1,
+            title = "Best practices for coroutines?",
+            content = "I'm looking for advice on structuring coroutines in a large project...",
+            authorName = "Mike Johnson",
+            imageUrl = null,
+            tag = TagInfo(2, "Question", "#14B8A6"),
+            commentCount = 18,
+            createdAt = "2025-01-20T10:00:00Z",
+            updatedAt = "2025-01-22T10:00:00Z"
+        ),
+        Post(
+            id = 3,
+            groupId = 1,
+            title = "Introduction to Kotlin Flow",
+            content = "A comprehensive guide to using Kotlin Flow for reactive programming...",
+            authorName = "Alex Rivera",
+            imageUrl = null,
+            tag = TagInfo(3, "Tutorial", "#F59E0B"),
+            commentCount = 56,
+            createdAt = "2025-01-18T10:00:00Z",
+            updatedAt = "2025-01-18T10:00:00Z"
+        ),
+        // Group 2 - Android Dev Community
+        Post(
+            id = 4,
+            groupId = 2,
+            title = "Compose Navigation 2.8 changes",
+            content = "The new type-safe navigation API is a game changer...",
+            authorName = "Emily Zhang",
+            imageUrl = null,
+            tag = TagInfo(5, "Compose", "#7C3AED"),
+            commentCount = 31,
+            createdAt = "2025-01-22T10:00:00Z",
+            updatedAt = "2025-01-22T10:00:00Z"
+        ),
+        Post(
+            id = 5,
+            groupId = 2,
+            title = "Clean Architecture with Compose",
+            content = "How I structure my Compose projects for maintainability...",
+            authorName = "David Kim",
+            imageUrl = null,
+            tag = TagInfo(6, "Architecture", "#14B8A6"),
+            commentCount = 67,
+            createdAt = "2025-01-19T10:00:00Z",
+            updatedAt = "2025-01-21T10:00:00Z"
+        )
+    )
+
     val groups = listOf(
         Group(
             id = 1,

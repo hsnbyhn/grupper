@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.grupper.ui.screens.GroupsListScreen
+import com.grupper.ui.screens.GroupDetailScreen
 
 /**
  * Grupper Navigation Graph
@@ -75,7 +76,7 @@ fun GrupperNavHost(
         // Group Detail
         composable<Screen.GroupDetail> { backStackEntry ->
             val route = backStackEntry.toRoute<Screen.GroupDetail>()
-            GroupDetailPlaceholder(
+            GroupDetailScreen(
                 groupId = route.groupId,
                 onBackClick = { navController.popBackStack() },
                 onPostClick = { postId ->
@@ -83,12 +84,6 @@ fun GrupperNavHost(
                 },
                 onCreatePostClick = {
                     navController.navigate(Screen.CreatePost(route.groupId))
-                },
-                onManageTagsClick = {
-                    navController.navigate(Screen.ManageTags(route.groupId))
-                },
-                onEditGroupClick = {
-                    navController.navigate(Screen.EditGroup(route.groupId))
                 }
             )
         }
