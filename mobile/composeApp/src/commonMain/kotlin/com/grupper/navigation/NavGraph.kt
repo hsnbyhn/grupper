@@ -15,6 +15,8 @@ import com.grupper.ui.screens.GroupsListScreen
 import com.grupper.ui.screens.GroupDetailScreen
 import com.grupper.ui.screens.PostDetailScreen
 import com.grupper.ui.screens.CreateEditGroupScreen
+import com.grupper.ui.screens.CreateEditPostScreen
+import com.grupper.ui.screens.ManageTagsScreen
 
 /**
  * Grupper Navigation Graph
@@ -181,7 +183,7 @@ fun GrupperNavHost(
             }
         ) { backStackEntry ->
             val route = backStackEntry.toRoute<Screen.CreatePost>()
-            CreateEditPostPlaceholder(
+            CreateEditPostScreen(
                 groupId = route.groupId,
                 postId = null,
                 onBackClick = { navController.popBackStack() },
@@ -212,8 +214,9 @@ fun GrupperNavHost(
             }
         ) { backStackEntry ->
             val route = backStackEntry.toRoute<Screen.EditPost>()
-            CreateEditPostPlaceholder(
-                groupId = null,
+            // Note: groupId needed but not in route, will need to fetch from post
+            CreateEditPostScreen(
+                groupId = 1L, // TODO: Get from post when editing
                 postId = route.postId,
                 onBackClick = { navController.popBackStack() },
                 onSaveSuccess = { navController.popBackStack() }
@@ -223,7 +226,7 @@ fun GrupperNavHost(
         // Manage Tags
         composable<Screen.ManageTags> { backStackEntry ->
             val route = backStackEntry.toRoute<Screen.ManageTags>()
-            ManageTagsPlaceholder(
+            ManageTagsScreen(
                 groupId = route.groupId,
                 onBackClick = { navController.popBackStack() }
             )
