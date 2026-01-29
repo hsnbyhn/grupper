@@ -1,5 +1,9 @@
 package com.grupper.plugins
 
+import com.grupper.routes.commentRoutes
+import com.grupper.routes.groupRoutes
+import com.grupper.routes.postRoutes
+import com.grupper.routes.tagRoutes
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -17,6 +21,7 @@ data class HealthResponse(
 @Serializable
 data class ApiInfoResponse(
     val message: String,
+    val version: String,
     val endpoints: List<String>
 )
 
@@ -42,21 +47,47 @@ fun Application.configureRouting() {
             )
         }
 
-        // API v1 routes will be added here
+        // API v1 routes
         route("/api/v1") {
             get {
                 call.respond(
                     ApiInfoResponse(
-                        message = "Welcome to Grupper API v1",
+                        message = "Welcome to Grupper API",
+                        version = "1.0.0",
                         endpoints = listOf(
-                            "/api/v1/groups",
-                            "/api/v1/posts",
-                            "/api/v1/comments",
-                            "/api/v1/upload"
+                            "GET    /api/v1/groups",
+                            "POST   /api/v1/groups",
+                            "GET    /api/v1/groups/{id}",
+                            "PUT    /api/v1/groups/{id}",
+                            "DELETE /api/v1/groups/{id}",
+                            "",
+                            "GET    /api/v1/groups/{groupId}/tags",
+                            "POST   /api/v1/groups/{groupId}/tags",
+                            "PUT    /api/v1/groups/{groupId}/tags/{id}",
+                            "DELETE /api/v1/groups/{groupId}/tags/{id}",
+                            "",
+                            "GET    /api/v1/groups/{groupId}/posts?tag=&sort=&page=&limit=",
+                            "POST   /api/v1/groups/{groupId}/posts",
+                            "GET    /api/v1/posts/{id}",
+                            "PUT    /api/v1/posts/{id}",
+                            "DELETE /api/v1/posts/{id}",
+                            "",
+                            "GET    /api/v1/posts/{postId}/comments",
+                            "POST   /api/v1/posts/{postId}/comments",
+                            "GET    /api/v1/comments/{id}",
+                            "PUT    /api/v1/comments/{id}",
+                            "DELETE /api/v1/comments/{id}",
+                            "POST   /api/v1/comments/{id}/reply"
                         )
                     )
                 )
             }
+
+            // Register all route modules
+            groupRoutes()
+            tagRoutes()
+            postRoutes()
+            commentRoutes()
         }
     }
 }
