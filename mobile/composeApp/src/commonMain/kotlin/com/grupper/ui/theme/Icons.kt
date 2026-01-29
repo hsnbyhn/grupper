@@ -319,4 +319,34 @@ object GrupperIcons {
                 close()
             }
         }.build()
+
+    val Reply: ImageVector
+        get() = ImageVector.Builder(
+            name = "Reply",
+            defaultWidth = 24.dp,
+            defaultHeight = 24.dp,
+            viewportWidth = 24f,
+            viewportHeight = 24f
+        ).apply {
+            path(
+                fill = SolidColor(Color.Black),
+                fillAlpha = 1.0f,
+                stroke = null,
+                strokeAlpha = 1.0f,
+                strokeLineWidth = 1.0f,
+                strokeLineCap = StrokeCap.Butt,
+                strokeLineJoin = StrokeJoin.Miter,
+                strokeLineMiter = 1.0f,
+                pathFillType = PathFillType.NonZero
+            ) {
+                moveTo(10f, 9f)
+                verticalLineTo(5f)
+                lineToRelative(-7f, 7f)
+                lineToRelative(7f, 7f)
+                verticalLineToRelative(-4.1f)
+                curveToRelative(5f, 0f, 8.5f, 1.6f, 11f, 5.1f)
+                curveToRelative(-1f, -5f, -4f, -10f, -11f, -11f)
+                close()
+            }
+        }.build()
 }
