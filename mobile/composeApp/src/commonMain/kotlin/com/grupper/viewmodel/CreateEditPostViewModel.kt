@@ -190,6 +190,36 @@ class CreateEditPostViewModel(
     }
 
     /**
+     * Create a new tag inline (during post creation)
+     * Automatically selects the new tag after creation
+     */
+    fun createTagInline(name: String, color: String, onSuccess: () -> Unit, onError: (String) -> Unit) {
+        viewModelScope.launch {
+            uiState = uiState.copy(isSaving = true, error = null)
+
+            try {
+                val newTag = TagService.createTag(
+                    groupId = groupId,
+                    name = name,
+                    color = color
+                )
+
+                // Add new tag to available tags and auto-select it
+                uiState = uiState.copy(
+                    availableTags = uiState.availableTags + newTag,
+                    selectedTag = newTag,
+                    isSaving = false
+                )
+
+                onSuccess()
+            } catch (e: Exception) {
+                uiState = uiState.copy(isSaving = false)
+                onError(e.message ?: "Failed to create tag")
+            }
+        }
+    }
+
+    /**
      * Clear error message
      */
     fun clearError() {
@@ -198,6 +228,18 @@ class CreateEditPostViewModel(
 
     companion object {
         const val MAX_TITLE_LENGTH = 100
+
+        // Preset colors for inline tag creation (matches ManageTagsViewModel)
+        val PRESET_COLORS = listOf(
+            "#EF4444", // Red
+            "#F97316", // Orange
+            "#F59E0B", // Amber
+            "#22C55E", // Green
+            "#14B8A6", // Teal
+            "#3B82F6", // Blue
+            "#8B5CF6", // Purple
+            "#EC4899"  // Pink
+        )
     }
 }
 

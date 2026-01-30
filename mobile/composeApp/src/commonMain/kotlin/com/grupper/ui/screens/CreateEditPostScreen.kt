@@ -5,8 +5,10 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -23,6 +25,14 @@ import com.grupper.ui.theme.GrupperIcons
 import com.grupper.ui.theme.GrupperShapes
 import com.grupper.ui.theme.GrupperSpacing
 import com.grupper.viewmodel.CreateEditPostViewModel
+
+/**
+ * Tag sheet mode - selection or creation
+ */
+private enum class TagSheetMode {
+    SELECTION,  // Showing tag list
+    CREATION    // Showing tag creation form
+}
 
 /**
  * Create/Edit Post Screen
@@ -53,6 +63,7 @@ fun CreateEditPostScreen(
     val uiState = viewModel.uiState
     var showDiscardDialog by remember { mutableStateOf(false) }
     var showTagSelector by remember { mutableStateOf(false) }
+    var tagSheetMode by remember { mutableStateOf(TagSheetMode.SELECTION) }
 
     // Handle back press with unsaved changes
     val handleBack = {
@@ -183,13 +194,35 @@ fun CreateEditPostScreen(
     // Tag selector bottom sheet
     if (showTagSelector) {
         TagSelectorBottomSheet(
+            mode = tagSheetMode,
             tags = uiState.availableTags,
             selectedTag = uiState.selectedTag,
             onTagSelected = { tag ->
                 viewModel.selectTag(tag)
                 showTagSelector = false
+                tagSheetMode = TagSheetMode.SELECTION // Reset for next time
             },
-            onDismiss = { showTagSelector = false }
+            onCreateNew = { tagSheetMode = TagSheetMode.CREATION },
+            onBackToSelection = { tagSheetMode = TagSheetMode.SELECTION },
+            onCreateTag = { name, color ->
+                viewModel.createTagInline(
+                    name = name,
+                    color = color,
+                    onSuccess = {
+                        // Show selection briefly then dismiss
+                        tagSheetMode = TagSheetMode.SELECTION
+                        showTagSelector = false
+                    },
+                    onError = { error ->
+                        // Error will be shown in creation form
+                    }
+                )
+            },
+            isSaving = uiState.isSaving,
+            onDismiss = {
+                showTagSelector = false
+                tagSheetMode = TagSheetMode.SELECTION // Reset for next time
+            }
         )
     }
 
@@ -332,56 +365,275 @@ private fun TagSelectorField(
 }
 
 /**
- * Tag selector bottom sheet
+ * Tag selector bottom sheet with inline creation
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun TagSelectorBottomSheet(
+    mode: TagSheetMode,
     tags: List<Tag>,
     selectedTag: Tag?,
     onTagSelected: (Tag) -> Unit,
+    onCreateNew: () -> Unit,
+    onBackToSelection: () -> Unit,
+    onCreateTag: (name: String, color: String) -> Unit,
+    isSaving: Boolean,
     onDismiss: () -> Unit
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,
         shape = GrupperShapes.BottomSheet
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(GrupperSpacing.Default)
-        ) {
-            Text(
-                text = "Select Tag",
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = GrupperSpacing.Default)
+        when (mode) {
+            TagSheetMode.SELECTION -> TagSelectionContent(
+                tags = tags,
+                selectedTag = selectedTag,
+                onTagSelected = onTagSelected,
+                onCreateNew = onCreateNew
             )
+            TagSheetMode.CREATION -> TagCreationContent(
+                onBack = onBackToSelection,
+                onCreate = onCreateTag,
+                isSaving = isSaving,
+                onCancel = onDismiss
+            )
+        }
+    }
+}
 
-            if (tags.isEmpty()) {
-                EmptyStateView(
-                    title = "No tags yet",
-                    message = "This group doesn't have any tags yet.",
-                    modifier = Modifier.height(200.dp)
-                )
-            } else {
-                LazyColumn(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(GrupperSpacing.Small)
-                ) {
-                    items(tags) { tag ->
-                        TagChip(
-                            name = tag.name,
-                            color = Color(parseColor(tag.color)),
-                            isSelected = tag.id == selectedTag?.id,
-                            onClick = { onTagSelected(tag) },
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                    }
+/**
+ * Tag selection content (list of tags + create button)
+ */
+@Composable
+private fun TagSelectionContent(
+    tags: List<Tag>,
+    selectedTag: Tag?,
+    onTagSelected: (Tag) -> Unit,
+    onCreateNew: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(GrupperSpacing.Default)
+    ) {
+        Text(
+            text = "Select Tag",
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = GrupperSpacing.Default)
+        )
+
+        if (tags.isEmpty()) {
+            EmptyStateView(
+                title = "No tags yet",
+                message = "Create your first tag to start organizing posts.",
+                modifier = Modifier.height(200.dp)
+            )
+        } else {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f, fill = false),
+                verticalArrangement = Arrangement.spacedBy(GrupperSpacing.Small)
+            ) {
+                items(tags) { tag ->
+                    TagChip(
+                        name = tag.name,
+                        color = Color(parseColor(tag.color)),
+                        isSelected = tag.id == selectedTag?.id,
+                        onClick = { onTagSelected(tag) },
+                        modifier = Modifier.fillMaxWidth()
+                    )
                 }
             }
 
-            Spacer(modifier = Modifier.height(GrupperSpacing.XLarge))
+            Spacer(modifier = Modifier.height(GrupperSpacing.Default))
+
+            // Divider
+            HorizontalDivider(
+                modifier = Modifier.padding(vertical = GrupperSpacing.Default)
+            )
+        }
+
+        // Create new tag button
+        GrupperSecondaryButton(
+            text = "Create new tag",
+            onClick = onCreateNew,
+            leadingIcon = GrupperIcons.Add,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(GrupperSpacing.XLarge))
+    }
+}
+
+/**
+ * Tag creation content (form to create new tag)
+ */
+@Composable
+private fun TagCreationContent(
+    onBack: () -> Unit,
+    onCreate: (name: String, color: String) -> Unit,
+    isSaving: Boolean,
+    onCancel: () -> Unit
+) {
+    var tagName by remember { mutableStateOf("") }
+    var selectedColor by remember { mutableStateOf(CreateEditPostViewModel.PRESET_COLORS.first()) }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(GrupperSpacing.Default)
+    ) {
+        // Header with back button
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(onClick = onBack) {
+                Icon(
+                    imageVector = GrupperIcons.ArrowBack,
+                    contentDescription = "Back to tag selection"
+                )
+            }
+            Text(
+                text = "Create new tag",
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.weight(1f)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(GrupperSpacing.Default))
+
+        // Tag name field
+        GrupperTextField(
+            value = tagName,
+            onValueChange = {
+                if (it.length <= 30) {
+                    tagName = it
+                    errorMessage = null
+                }
+            },
+            label = "Tag name",
+            placeholder = "e.g., Question, Tutorial, Discussion",
+            maxLength = 30,
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(modifier = Modifier.height(GrupperSpacing.Default))
+
+        // Color picker
+        Text(
+            text = "Choose color",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(bottom = GrupperSpacing.Small)
+        )
+
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(GrupperSpacing.Small)
+        ) {
+            items(CreateEditPostViewModel.PRESET_COLORS) { presetColor ->
+                ColorOption(
+                    color = presetColor,
+                    isSelected = selectedColor == presetColor,
+                    onClick = { selectedColor = presetColor }
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(GrupperSpacing.Default))
+
+        // Preview
+        Text(
+            text = "Preview",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(bottom = GrupperSpacing.Small)
+        )
+
+        if (tagName.isNotBlank()) {
+            TagChip(
+                name = tagName,
+                color = Color(parseColor(selectedColor)),
+                isSelected = true,
+                onClick = { }
+            )
+        } else {
+            Text(
+                text = "Enter a tag name to see preview",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(GrupperSpacing.Large))
+
+        // Error message
+        if (errorMessage != null) {
+            Text(
+                text = errorMessage!!,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.padding(bottom = GrupperSpacing.Default)
+            )
+        }
+
+        // Action buttons
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(GrupperSpacing.Default)
+        ) {
+            GrupperTextButton(
+                text = "Cancel",
+                onClick = onCancel,
+                modifier = Modifier.weight(1f)
+            )
+            GrupperPrimaryButton(
+                text = "Create",
+                onClick = { onCreate(tagName, selectedColor) },
+                isLoading = isSaving,
+                enabled = tagName.isNotBlank() && !isSaving,
+                modifier = Modifier.weight(1f)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(GrupperSpacing.XLarge))
+    }
+}
+
+/**
+ * Color option circle for color picker
+ */
+@Composable
+private fun ColorOption(
+    color: String,
+    isSelected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier
+            .size(48.dp)
+            .clip(CircleShape)
+            .background(Color(parseColor(color)))
+            .border(
+                width = if (isSelected) 3.dp else 0.dp,
+                color = if (isSelected) MaterialTheme.colorScheme.primary else Color.Transparent,
+                shape = CircleShape
+            )
+            .clickable(onClick = onClick),
+        contentAlignment = Alignment.Center
+    ) {
+        if (isSelected) {
+            Icon(
+                imageVector = GrupperIcons.Check,
+                contentDescription = "Selected",
+                tint = Color.White,
+                modifier = Modifier.size(24.dp)
+            )
         }
     }
 }
