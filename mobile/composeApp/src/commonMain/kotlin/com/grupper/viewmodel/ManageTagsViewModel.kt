@@ -5,9 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.grupper.data.api.TagService
 import com.grupper.data.model.Tag
-import com.grupper.data.repository.MockData
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
@@ -33,8 +32,7 @@ class ManageTagsViewModel(
             uiState = uiState.copy(isLoading = true)
 
             try {
-                delay(300)
-                val tags = MockData.getTagsForGroup(groupId)
+                val tags = TagService.getTagsByGroupId(groupId)
                 uiState = uiState.copy(
                     isLoading = false,
                     tags = tags
@@ -108,10 +106,22 @@ class ManageTagsViewModel(
             uiState = uiState.copy(isSaving = true)
 
             try {
-                delay(500)
+                if (uiState.editingTagId != null) {
+                    // Update existing tag
+                    TagService.updateTag(
+                        tagId = uiState.editingTagId!!,
+                        name = uiState.editName,
+                        color = uiState.editColor
+                    )
+                } else {
+                    // Create new tag
+                    TagService.createTag(
+                        groupId = groupId,
+                        name = uiState.editName,
+                        color = uiState.editColor
+                    )
+                }
 
-                // TODO: Replace with actual API call
-                // For now, just reload tags
                 loadTags()
                 cancelEdit()
 
@@ -133,10 +143,7 @@ class ManageTagsViewModel(
             uiState = uiState.copy(isSaving = true)
 
             try {
-                delay(500)
-
-                // TODO: Replace with actual API call
-                // For now, just reload tags
+                TagService.deleteTag(tagId)
                 loadTags()
 
                 uiState = uiState.copy(isSaving = false)

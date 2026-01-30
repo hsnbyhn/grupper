@@ -75,6 +75,7 @@ fun GroupDetailScreen(
     onBackClick: () -> Unit,
     onPostClick: (Long) -> Unit,
     onCreatePostClick: () -> Unit,
+    onManageTagsClick: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: GroupDetailViewModel = viewModel { GroupDetailViewModel(groupId) }
 ) {
@@ -104,6 +105,11 @@ fun GroupDetailScreen(
                     }
                 },
                 actions = {
+                    // Manage Tags button
+                    TextButton(onClick = onManageTagsClick) {
+                        Text("Tags", style = MaterialTheme.typography.labelLarge)
+                    }
+
                     // Sort dropdown
                     Box {
                         TextButton(onClick = { showSortMenu = true }) {

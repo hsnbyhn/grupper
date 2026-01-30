@@ -2,9 +2,8 @@ package com.grupper.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.grupper.data.api.GroupService
 import com.grupper.data.model.Group
-import com.grupper.data.repository.MockData
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -29,11 +28,7 @@ class GroupsListViewModel : ViewModel() {
             _uiState.update { it.copy(isLoading = true, error = null) }
 
             try {
-                // Simulate network delay
-                delay(800)
-
-                // Using mock data for now - will be replaced with API call
-                val groups = MockData.groups
+                val groups = GroupService.getAllGroups()
 
                 _uiState.update {
                     it.copy(
@@ -58,10 +53,7 @@ class GroupsListViewModel : ViewModel() {
             _uiState.update { it.copy(isRefreshing = true) }
 
             try {
-                // Simulate network delay
-                delay(500)
-
-                val groups = MockData.groups
+                val groups = GroupService.getAllGroups()
 
                 _uiState.update {
                     it.copy(

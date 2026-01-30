@@ -31,3 +31,11 @@ data class UpdateGroupRequest(
     val description: String? = null,
     val imageUrl: String? = null
 )
+
+@Serializable
+data class GroupsResponse(
+    val groups: List<Group>,
+    val totalCount: Int,
+    val page: Int,
+    val limit: Int
+)

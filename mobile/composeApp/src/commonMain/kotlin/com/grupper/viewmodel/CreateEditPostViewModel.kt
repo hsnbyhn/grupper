@@ -5,10 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.grupper.data.api.PostService
+import com.grupper.data.api.TagService
 import com.grupper.data.model.Post
 import com.grupper.data.model.Tag
-import com.grupper.data.repository.MockData
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
@@ -38,8 +38,7 @@ class CreateEditPostViewModel(
     private fun loadGroupTags() {
         viewModelScope.launch {
             try {
-                delay(200)
-                val tags = MockData.getTagsForGroup(groupId)
+                val tags = TagService.getTagsByGroupId(groupId)
                 uiState = uiState.copy(availableTags = tags)
             } catch (e: Exception) {
                 uiState = uiState.copy(error = "Failed to load tags")
@@ -55,27 +54,18 @@ class CreateEditPostViewModel(
             uiState = uiState.copy(isLoading = true)
 
             try {
-                delay(300)
+                val post = PostService.getPostById(id)
+                val selectedTag = uiState.availableTags.find { it.id == post.tag?.id }
 
-                val post = MockData.posts.find { it.id == id }
-                if (post != null) {
-                    val selectedTag = uiState.availableTags.find { it.id == post.tag?.id }
-
-                    uiState = uiState.copy(
-                        isLoading = false,
-                        title = post.title,
-                        content = post.content,
-                        authorName = post.authorName,
-                        imageUrl = post.imageUrl,
-                        selectedTag = selectedTag,
-                        isEditMode = true
-                    )
-                } else {
-                    uiState = uiState.copy(
-                        isLoading = false,
-                        error = "Post not found"
-                    )
-                }
+                uiState = uiState.copy(
+                    isLoading = false,
+                    title = post.title,
+                    content = post.content,
+                    authorName = post.authorName,
+                    imageUrl = post.imageUrl,
+                    selectedTag = selectedTag,
+                    isEditMode = true
+                )
             } catch (e: Exception) {
                 uiState = uiState.copy(
                     isLoading = false,
@@ -168,14 +158,28 @@ class CreateEditPostViewModel(
             uiState = uiState.copy(isSaving = true, error = null)
 
             try {
-                delay(800) // Simulate network delay
-
-                // TODO: Replace with actual API call
-                // For now, simulate success
-                val savedPostId = postId ?: kotlin.random.Random.nextLong(100, 999)
+                val savedPost = if (postId != null) {
+                    // Update existing post
+                    PostService.updatePost(
+                        id = postId,
+                        title = uiState.title,
+                        content = uiState.content,
+                        imageUrl = uiState.imageUrl
+                    )
+                } else {
+                    // Create new post
+                    PostService.createPost(
+                        groupId = groupId,
+                        tagId = uiState.selectedTag!!.id,
+                        title = uiState.title,
+                        content = uiState.content,
+                        authorName = uiState.authorName,
+                        imageUrl = uiState.imageUrl
+                    )
+                }
 
                 uiState = uiState.copy(isSaving = false)
-                onSuccess(savedPostId)
+                onSuccess(savedPost.id)
             } catch (e: Exception) {
                 uiState = uiState.copy(
                     isSaving = false,

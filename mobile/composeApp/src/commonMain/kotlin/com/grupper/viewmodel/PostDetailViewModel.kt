@@ -5,12 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.grupper.data.api.CommentService
+import com.grupper.data.api.PostService
 import com.grupper.data.model.Comment
 import com.grupper.data.model.Post
-import com.grupper.data.repository.MockData
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 
 /**
  * ViewModel for Post Detail screen
@@ -29,27 +28,14 @@ class PostDetailViewModel : ViewModel() {
             uiState = uiState.copy(isLoading = true, error = null)
 
             try {
-                // Simulate network delay
-                delay(500)
+                val post = PostService.getPostById(postId)
+                val comments = CommentService.getCommentsByPostId(postId)
 
-                // Get post from mock data
-                val post = MockData.posts.find { it.id == postId }
-
-                if (post != null) {
-                    // Load comments for this post
-                    val comments = MockData.getCommentsForPost(postId)
-
-                    uiState = uiState.copy(
-                        isLoading = false,
-                        post = post,
-                        comments = comments
-                    )
-                } else {
-                    uiState = uiState.copy(
-                        isLoading = false,
-                        error = "Post not found"
-                    )
-                }
+                uiState = uiState.copy(
+                    isLoading = false,
+                    post = post,
+                    comments = comments
+                )
             } catch (e: Exception) {
                 uiState = uiState.copy(
                     isLoading = false,
@@ -68,10 +54,7 @@ class PostDetailViewModel : ViewModel() {
                 uiState = uiState.copy(isRefreshing = true)
 
                 try {
-                    delay(800)
-
-                    // Reload comments
-                    val comments = MockData.getCommentsForPost(uiState.post!!.id)
+                    val comments = CommentService.getCommentsByPostId(uiState.post!!.id)
 
                     uiState = uiState.copy(
                         isRefreshing = false,
@@ -94,21 +77,12 @@ class PostDetailViewModel : ViewModel() {
             uiState = uiState.copy(isSubmittingComment = true)
 
             try {
-                delay(500)
-
-                // Create new comment
-                val newComment = Comment(
-                    id = Random.nextLong(100000, 999999), // Mock ID
+                val newComment = CommentService.createComment(
                     postId = uiState.post!!.id,
-                    parentId = null,
                     authorName = authorName,
-                    content = content,
-                    createdAt = "2025-01-29T10:00:00Z", // Mock timestamp
-                    updatedAt = "2025-01-29T10:00:00Z",
-                    replies = emptyList()
+                    content = content
                 )
 
-                // Add to comments list
                 uiState = uiState.copy(
                     isSubmittingComment = false,
                     comments = uiState.comments + newComment
@@ -132,18 +106,10 @@ class PostDetailViewModel : ViewModel() {
             uiState = uiState.copy(isSubmittingComment = true)
 
             try {
-                delay(500)
-
-                // Create new reply
-                val newReply = Comment(
-                    id = Random.nextLong(100000, 999999), // Mock ID
-                    postId = uiState.post!!.id,
-                    parentId = parentComment.id,
+                val newReply = CommentService.createReply(
+                    parentCommentId = parentComment.id,
                     authorName = authorName,
-                    content = content,
-                    createdAt = "2025-01-29T10:00:00Z",
-                    updatedAt = "2025-01-29T10:00:00Z",
-                    replies = emptyList()
+                    content = content
                 )
 
                 // Add reply to parent comment (recursive update)

@@ -5,9 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.grupper.data.api.GroupService
 import com.grupper.data.model.Group
-import com.grupper.data.repository.MockData
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
@@ -36,23 +35,15 @@ class CreateEditGroupViewModel(
             uiState = uiState.copy(isLoading = true)
 
             try {
-                delay(300)
+                val group = GroupService.getGroupById(id)
 
-                val group = MockData.groups.find { it.id == id }
-                if (group != null) {
-                    uiState = uiState.copy(
-                        isLoading = false,
-                        name = group.name,
-                        description = group.description,
-                        imageUrl = group.imageUrl,
-                        isEditMode = true
-                    )
-                } else {
-                    uiState = uiState.copy(
-                        isLoading = false,
-                        error = "Group not found"
-                    )
-                }
+                uiState = uiState.copy(
+                    isLoading = false,
+                    name = group.name,
+                    description = group.description,
+                    imageUrl = group.imageUrl,
+                    isEditMode = true
+                )
             } catch (e: Exception) {
                 uiState = uiState.copy(
                     isLoading = false,
@@ -127,14 +118,25 @@ class CreateEditGroupViewModel(
             uiState = uiState.copy(isSaving = true, error = null)
 
             try {
-                delay(800) // Simulate network delay
-
-                // TODO: Replace with actual API call
-                // For now, simulate success
-                val groupId = groupId ?: kotlin.random.Random.nextLong(100, 999)
+                val savedGroup = if (groupId != null) {
+                    // Update existing group
+                    GroupService.updateGroup(
+                        id = groupId,
+                        name = uiState.name,
+                        description = uiState.description,
+                        imageUrl = uiState.imageUrl
+                    )
+                } else {
+                    // Create new group
+                    GroupService.createGroup(
+                        name = uiState.name,
+                        description = uiState.description,
+                        imageUrl = uiState.imageUrl
+                    )
+                }
 
                 uiState = uiState.copy(isSaving = false)
-                onSuccess(groupId)
+                onSuccess(savedGroup.id)
             } catch (e: Exception) {
                 uiState = uiState.copy(
                     isSaving = false,

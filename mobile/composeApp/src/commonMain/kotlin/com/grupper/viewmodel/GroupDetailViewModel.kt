@@ -2,12 +2,13 @@ package com.grupper.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.grupper.data.api.GroupService
+import com.grupper.data.api.PostService
+import com.grupper.data.api.TagService
 import com.grupper.data.model.Group
 import com.grupper.data.model.Post
 import com.grupper.data.model.PostSortOrder
 import com.grupper.data.model.Tag
-import com.grupper.data.repository.MockData
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -34,15 +35,12 @@ class GroupDetailViewModel(
             _uiState.update { it.copy(isLoading = true, error = null) }
 
             try {
-                // Simulate network delay
-                delay(600)
-
-                // Using mock data - will be replaced with API call
-                val group = MockData.groups.find { it.id == groupId }
-                    ?: throw IllegalArgumentException("Group not found")
-
-                val tags = MockData.tags.filter { it.groupId == groupId }
-                val allPosts = MockData.posts.filter { it.groupId == groupId }
+                val group = GroupService.getGroupById(groupId)
+                val tags = TagService.getTagsByGroupId(groupId)
+                val allPosts = PostService.getPostsByGroupId(
+                    groupId = groupId,
+                    sortOrder = PostSortOrder.NEWEST
+                )
 
                 _uiState.update {
                     it.copy(
@@ -50,7 +48,7 @@ class GroupDetailViewModel(
                         group = group,
                         tags = tags,
                         allPosts = allPosts,
-                        filteredPosts = allPosts.sortedByDescending { post -> post.createdAt },
+                        filteredPosts = allPosts,
                         error = null
                     )
                 }
@@ -70,13 +68,13 @@ class GroupDetailViewModel(
             _uiState.update { it.copy(isRefreshing = true) }
 
             try {
-                delay(500)
-
-                val group = MockData.groups.find { it.id == groupId }
-                    ?: throw IllegalArgumentException("Group not found")
-
-                val tags = MockData.tags.filter { it.groupId == groupId }
-                val allPosts = MockData.posts.filter { it.groupId == groupId }
+                val group = GroupService.getGroupById(groupId)
+                val tags = TagService.getTagsByGroupId(groupId)
+                val allPosts = PostService.getPostsByGroupId(
+                    groupId = groupId,
+                    tagId = _uiState.value.selectedTagId,
+                    sortOrder = _uiState.value.sortOrder
+                )
 
                 _uiState.update {
                     it.copy(
@@ -84,7 +82,7 @@ class GroupDetailViewModel(
                         group = group,
                         tags = tags,
                         allPosts = allPosts,
-                        filteredPosts = applyFiltersAndSort(allPosts, it.selectedTagId, it.sortOrder),
+                        filteredPosts = allPosts,
                         error = null
                     )
                 }
@@ -100,41 +98,36 @@ class GroupDetailViewModel(
     }
 
     fun selectTag(tagId: Long?) {
-        _uiState.update { state ->
-            val newSelectedTagId = if (state.selectedTagId == tagId) null else tagId
-            state.copy(
-                selectedTagId = newSelectedTagId,
-                filteredPosts = applyFiltersAndSort(state.allPosts, newSelectedTagId, state.sortOrder)
-            )
-        }
+        val newSelectedTagId = if (_uiState.value.selectedTagId == tagId) null else tagId
+        _uiState.update { it.copy(selectedTagId = newSelectedTagId) }
+        loadPosts()
     }
 
     fun changeSortOrder(sortOrder: PostSortOrder) {
-        _uiState.update { state ->
-            state.copy(
-                sortOrder = sortOrder,
-                filteredPosts = applyFiltersAndSort(state.allPosts, state.selectedTagId, sortOrder)
-            )
-        }
+        _uiState.update { it.copy(sortOrder = sortOrder) }
+        loadPosts()
     }
 
-    private fun applyFiltersAndSort(
-        posts: List<Post>,
-        selectedTagId: Long?,
-        sortOrder: PostSortOrder
-    ): List<Post> {
-        // Filter by tag
-        val filtered = if (selectedTagId != null) {
-            posts.filter { it.tag?.id == selectedTagId }
-        } else {
-            posts
-        }
+    private fun loadPosts() {
+        viewModelScope.launch {
+            try {
+                val posts = PostService.getPostsByGroupId(
+                    groupId = groupId,
+                    tagId = _uiState.value.selectedTagId,
+                    sortOrder = _uiState.value.sortOrder
+                )
 
-        // Sort
-        return when (sortOrder) {
-            PostSortOrder.NEWEST -> filtered.sortedByDescending { it.createdAt }
-            PostSortOrder.OLDEST -> filtered.sortedBy { it.createdAt }
-            PostSortOrder.MOST_COMMENTED -> filtered.sortedByDescending { it.commentCount }
+                _uiState.update {
+                    it.copy(
+                        allPosts = posts,
+                        filteredPosts = posts
+                    )
+                }
+            } catch (e: Exception) {
+                _uiState.update {
+                    it.copy(error = e.message ?: "Failed to load posts")
+                }
+            }
         }
     }
 

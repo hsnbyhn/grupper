@@ -45,3 +45,11 @@ enum class PostSortOrder(val value: String) {
     OLDEST("oldest"),
     MOST_COMMENTED("most_commented")
 }
+
+@Serializable
+data class PostsResponse(
+    val posts: List<Post>,
+    val totalCount: Int,
+    val page: Int,
+    val limit: Int
+)

@@ -88,6 +88,9 @@ fun GrupperNavHost(
                 },
                 onCreatePostClick = {
                     navController.navigate(Screen.CreatePost(route.groupId))
+                },
+                onManageTagsClick = {
+                    navController.navigate(Screen.ManageTags(route.groupId))
                 }
             )
         }
